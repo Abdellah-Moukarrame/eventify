@@ -8,15 +8,16 @@ function screenswitcher(indix) {
   screens.forEach((section) => {
     const datascreen = indix.dataset.screen;
     section.classList.remove("is-visible");
-
+    const eatatsection=section.dataset.screen
     if (section.dataset.screen === datascreen) {
       section.classList.add("is-visible");
     }
   });
   btns.forEach((btn) => {
     btn.classList.remove("is-active");
-    const databutton=indix.dataset.screen;
-    if (btn.dataset.screen===databutton) {
+    const databutton = indix.dataset.screen;
+    const etatbtn =btn.dataset.screen
+    if (etatbtn === databutton) {
       btn.classList.add("is-active");
     }
   });
