@@ -9,7 +9,7 @@ function screenswitcher(indix) {
     const datascreen = indix.dataset.screen;
     section.classList.remove("is-visible");
     const eatatsection = section.dataset.screen;
-    if (eatatsection=== datascreen) {
+    if (eatatsection === datascreen) {
       section.classList.add("is-visible");
     }
   });
@@ -74,10 +74,7 @@ form.addEventListener("submit", (e) => {
   } else {
     errormsg.classList.add("is-hidden");
   }
-  
-});
-
-    let objetdata = {
+  let objetdata = {
     title: title,
     image: imageurl,
     description: description,
@@ -86,15 +83,14 @@ form.addEventListener("submit", (e) => {
   };
   events.push(objetdata);
   console.log(events);
-  form.reset()
-  cntrtotalevent()
+  form.reset();
+  cntrtotalevent();
 });
-
 
 /////// ancrumenter le nombre total d events dashboard
 
 function cntrtotalevent() {
-  // jai selecter les elements 
+  // jai selecter les elements
   const totleeventcntr = document.querySelector("#stat-total-events");
   const totaleseatscntr = document.querySelector("#stat-total-seats");
   const totalepricecntr = document.querySelector("#stat-total-price");
@@ -104,14 +100,12 @@ function cntrtotalevent() {
   const totalseats = events.reduce((valeurinitseats, event) => {
     return valeurinitseats + Number(event.nombrseats);
   }, 0);
-  //calculer le totale de prix 
+  //calculer le totale de prix
   const totalprice = events.reduce((valeurinitprix, event) => {
     return valeurinitprix + Number(event.prix);
   }, 0);
-  //affecter les resultats 
+  //affecter les resultats
   totaleseatscntr.textContent = totalseats;
   totleeventcntr.textContent = cntrevent;
-  totalepricecntr.textContent="$"+totalprice;
-  
+  totalepricecntr.textContent = "$" + totalprice;
 }
-
