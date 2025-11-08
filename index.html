@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events Management App</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="app">
@@ -22,17 +23,19 @@
                     <span class="sidebar__label">Statistics</span>
                 </button>
 
-                <button class="sidebar__btn" onclick="screenswitcher(this)" data-screen="add">
+                <button class="sidebar__btn" onclick="screenswitcher(this)"  data-screen="add">
                     <span class="sidebar__icon">➕</span>
                     <span class="sidebar__label">Add Event</span>
                 </button>
+
 
                 <button class="sidebar__btn" onclick="screenswitcher(this)" data-screen="list">
                     <span class="sidebar__icon">📋</span>
                     <span class="sidebar__label">Events</span>
                 </button>
 
-                <button class="sidebar__btn" onclick="screenswitcher(this)" data-screen="archive">
+
+                <button class="sidebar__btn" onclick="screenswitcher(this)"  data-screen="archive">
                     <span class="sidebar__icon">🗄️</span>
                     <span class="sidebar__label">Archive</span>
                 </button>
@@ -112,6 +115,10 @@
                                     class="input" 
                                     placeholder="https://example.com/image.jpg"
                                 >
+                            </div>
+                            <br>
+                            <div class="image_container">
+
                             </div>
 
                             <!-- Description -->
