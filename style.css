@@ -306,7 +306,11 @@ textarea.input {
   gap: var(--spacing-md);
   margin-top: var(--spacing-xl);
 }
-
+.image_container{
+  margin-bottom: var(--spacing-lg);
+  width: 500px;
+  height: 100px;
+}
 /* ============================================
    BUTTONS
    ============================================ */

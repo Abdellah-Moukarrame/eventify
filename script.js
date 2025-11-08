@@ -74,6 +74,9 @@ form.addEventListener("submit", (e) => {
   } else {
     errormsg.classList.add("is-hidden");
   }
+  
+});
+
     let objetdata = {
     title: title,
     image: imageurl,
@@ -111,3 +114,4 @@ function cntrtotalevent() {
   totalepricecntr.textContent="$"+totalprice;
   
 }
+
