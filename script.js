@@ -8,15 +8,15 @@ function screenswitcher(indix) {
   screens.forEach((section) => {
     const datascreen = indix.dataset.screen;
     section.classList.remove("is-visible");
-    const eatatsection=section.dataset.screen
-    if (section.dataset.screen === datascreen) {
+    const eatatsection = section.dataset.screen;
+    if (eatatsection=== datascreen) {
       section.classList.add("is-visible");
     }
   });
   btns.forEach((btn) => {
     btn.classList.remove("is-active");
     const databutton = indix.dataset.screen;
-    const etatbtn =btn.dataset.screen
+    const etatbtn = btn.dataset.screen;
     if (etatbtn === databutton) {
       btn.classList.add("is-active");
     }
@@ -74,10 +74,5 @@ form.addEventListener("submit", (e) => {
   } else {
     errormsg.classList.add("is-hidden");
   }
-  function delay() {
-    form.reset();
-  }
-  setTimeout(delay,5000)
-  
   
 });
