@@ -88,6 +88,7 @@ form.addEventListener("submit", (e) => {
   cntrtotalevent();
 });
 
+
 let cntrvariant = 0;
 function addvariante() {
   cntrvariant++;
@@ -114,3 +115,26 @@ function deletevariante(index) {
   
 }
 console.log(cntrvariant);
+
+/////// ancrumenter le nombre total d events dashboard
+
+function cntrtotalevent() {
+  // jai selecter les elements
+  const totleeventcntr = document.querySelector("#stat-total-events");
+  const totaleseatscntr = document.querySelector("#stat-total-seats");
+  const totalepricecntr = document.querySelector("#stat-total-price");
+  //calculer total d events
+  let cntrevent = events.length;
+  //calculer le total de seats
+  const totalseats = events.reduce((valeurinitseats, event) => {
+    return valeurinitseats + Number(event.nombrseats);
+  }, 0);
+  //calculer le totale de prix
+  const totalprice = events.reduce((valeurinitprix, event) => {
+    return valeurinitprix + Number(event.prix);
+  }, 0);
+  //affecter les resultats
+  totaleseatscntr.textContent = totalseats;
+  totleeventcntr.textContent = cntrevent;
+  totalepricecntr.textContent = "$" + totalprice;
+}
