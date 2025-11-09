@@ -113,22 +113,27 @@ function cntrtotalevent() {
 
 
 function listevents() {
-  const tbody=document.querySelector(".table__body");
-  let cntrevent=1;
-  tbody.innerHTML="";
-  events.forEach(event => {
-    tbody.innerHTML+=`
+  const tbody = document.querySelector(".table__body");
+  let cntrevent = 1;
+  tbody.innerHTML = "";
+  events.forEach((event) => {
+    tbody.innerHTML += `
     <tr class="table__row" >
         <td>${cntrevent++}</td>
         <td>${event.title}</td>
         <td>${event.nombrseats}</td>
         <td><span class="badge">${event.prix}</span></td>
         <td>
-          <button class="btn btn--small" data-action="details" data-event-id="1">Details</button>
+          <button class="btn btn--small" data-action="details" onclick="detailstable(this)" data-event-id="1">Details</button>
           <button class="btn btn--small" data-action="edit" data-event-id="1">Edit</button>
-          <button class="btn btn--danger btn--small" data-action="archive" data-event-id="1">Delete</button>
+          <button class="btn btn--danger btn--small" onclick="deletetable(this)" data-action="archive" data-event-id="1">Delete</button>
         </td>
-    </tr>`
+    </tr>`;
   });
-  
+}
+function deletetable(index) {
+  const trdelete = index.closest(".table__row");
+  // archive.push(trdelete.textContent);
+  // console.log(archive);
+  trdelete.remove();
 }
