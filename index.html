@@ -28,10 +28,12 @@
                     <span class="sidebar__label">Add Event</span>
                 </button>
 
-                <button class="sidebar__btn" onclick="screenswitcher(this)"  data-screen="list">
+
+                <button class="sidebar__btn" onclick="screenswitcher(this)" data-screen="list">
                     <span class="sidebar__icon">📋</span>
                     <span class="sidebar__label">Events</span>
                 </button>
+
 
                 <button class="sidebar__btn" onclick="screenswitcher(this)"  data-screen="archive">
                     <span class="sidebar__icon">🗄️</span>
@@ -161,7 +163,7 @@
                             <fieldset class="variants">
                                 <legend class="variants__title">
                                     Pricing Variants (Optional)
-                                    <button type="button" class="btn btn--small" id="btn-add-variant">+ Add Variant</button>
+                                    <button type="button" class="btn btn--small" onclick="addvariante()" id="btn-add-variant">+ Add Variant</button>
                                 </legend>
                                 
                                 <!-- Variant rows will be appended here by JS -->
