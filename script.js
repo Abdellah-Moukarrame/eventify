@@ -74,6 +74,7 @@ form.addEventListener("submit", (e) => {
   } else {
     errormsg.classList.add("is-hidden");
   }
+
   let objetdata = {
     title: title,
     image: imageurl,
@@ -87,6 +88,34 @@ form.addEventListener("submit", (e) => {
   cntrtotalevent();
   listevents();
 });
+
+
+let cntrvariant = 0;
+function addvariante() {
+  cntrvariant++;
+  const variantslist = document.querySelector(".variants__list");
+  variantslist.innerHTML += `
+      <div class="variant-row">
+          <input type="text" class="input variant-row__name" placeholder="Variant name (e.g., 'Early Bird')" />
+          <input type="number" class="input variant-row__qty" placeholder="Qty" min="1" />
+          <input type="number" class="input variant-row__value" placeholder="Value" step="0.01" />
+          <select class="select variant-row__type">
+            <option value="fixed">Fixed Price</option>
+            <option value="percentage">Percentage Off</option>
+          </select>
+          <button type="button" class="btn btn--danger btn--small variant-row__remove" onclick="deletevariante(this)">Remove</button>
+      </div>
+    `;
+  console.log(cntrvariant);
+}
+
+function deletevariante(index) {
+  let deletedvariante = index.closest(".variant-row");
+  deletedvariante.remove();
+  cntrvariant--;
+  
+}
+console.log(cntrvariant);
 
 /////// ancrumenter le nombre total d events dashboard
 
