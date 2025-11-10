@@ -264,7 +264,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="table__body">
+                            <tbody class="table__body" id="data-archive-table">
                                 <!-- EXAMPLE: Students will populate this with JS -->
                                 <!-- 
                                 <tr class="table__row" data-event-id="1">
@@ -292,7 +292,7 @@
         <div class="modal__content">
             <header class="modal__header">
                 <h3 class="modal__title" id="modal-title">Event Details</h3>
-                <button class="modal__close" data-action="close-modal">&times;</button>
+                <button class="modal__close" onclick="closemodal()" data-action="close-modal">&times;</button>
             </header>
             <div class="modal__body" id="modal-body">
                 <!-- Content populated by JS -->

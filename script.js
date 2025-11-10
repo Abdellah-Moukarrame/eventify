@@ -83,12 +83,12 @@ form.addEventListener("submit", (e) => {
     prix: prixbase,
   };
   events.push(objetdata);
+  localStorage.setItem("event", JSON.stringify(events));
   console.log(events);
   form.reset();
-  cntrtotalevent();
   listevents();
+  cntrtotalevent();
 });
-
 
 let cntrvariant = 0;
 function addvariante() {
@@ -113,7 +113,6 @@ function deletevariante(index) {
   let deletedvariante = index.closest(".variant-row");
   deletedvariante.remove();
   cntrvariant--;
-  
 }
 console.log(cntrvariant);
 
@@ -140,29 +139,50 @@ function cntrtotalevent() {
   totalepricecntr.textContent = "$" + totalprice;
 }
 
-
 function listevents() {
   const tbody = document.querySelector(".table__body");
-  let cntrevent = 1;
+
+  events = JSON.parse(localStorage.getItem("event")) || [];
+
   tbody.innerHTML = "";
-  events.forEach((event) => {
+  events.forEach((event, index) => {
     tbody.innerHTML += `
     <tr class="table__row" >
-        <td>${cntrevent++}</td>
+        <td>${index + 1}</td>
         <td>${event.title}</td>
         <td>${event.nombrseats}</td>
         <td><span class="badge">${event.prix}</span></td>
         <td>
-          <button class="btn btn--small" data-action="details" onclick="detailstable(this)" data-event-id="1">Details</button>
-          <button class="btn btn--small" data-action="edit" data-event-id="1">Edit</button>
-          <button class="btn btn--danger btn--small" onclick="deletetable(this)" data-action="archive" data-event-id="1">Delete</button>
+          <button class="btn btn--small" data-action="details" onclick="detailstable(${index})" data-event-id="1">Details</button>
+          <button class="btn btn--small" data-action="edit" onclick="edittable(${index})" data-event-id="1">Edit</button>
+          <button class="btn btn--danger btn--small" onclick="deletetable(${index})" data-action="archive" data-event-id="1">Delete</button>
         </td>
     </tr>`;
   });
 }
+listevents();
+
 function deletetable(index) {
-  const trdelete = index.closest(".table__row");
-  // archive.push(trdelete.textContent);
-  // console.log(archive);
-  trdelete.remove();
+  archive.push(events[index]);
+  console.log(archive);
+  localStorage.setItem("arch", JSON.stringify(archive));
+  events.splice(index, 1);
+  localStorage.setItem("event", JSON.stringify(events));
+  listevents();
+  // listarchive();
 }
+
+const divmodal = document.querySelector(".modal");
+
+function detailstable(index) {
+  const modal = document.querySelector(".modal__body");
+  divmodal.classList.remove("is-hidden");
+  events.forEach(() => {
+    modal.innerHTML = `
+      <h1>Title : ${events[index].title} </h1>
+      <h1>Prix : ${events[index].prix} </h1>
+      <h1>NombreSeats : ${events[index].nombrseats} </h1>
+  `;
+  });
+}
+
