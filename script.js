@@ -169,7 +169,7 @@ function deletetable(index) {
   events.splice(index, 1);
   localStorage.setItem("event", JSON.stringify(events));
   listevents();
-  // listarchive();
+  listarchive();
 }
 
 const divmodal = document.querySelector(".modal");
@@ -186,3 +186,31 @@ function detailstable(index) {
   });
 }
 
+function closemodal() {
+  divmodal.classList.add("is-hidden");
+}
+
+function listarchive() {
+  const archivetable = document.querySelector("#data-archive-table");
+  console.log(archivetable);
+
+  archive = JSON.parse(localStorage.getItem("arch")) || [];
+  archivetable.innerHTML = "";
+  archive.forEach((ar, index) => {
+    archivetable.innerHTML += `
+   <tr class="table__row" data-event-id="1">
+                                    <td>${index + 1}</td>
+                                    <td>${ar.title}</td>
+                                    <td>${ar.prix}</td>
+                                    <td>${ar.nombrseats}</td>
+                                    <td>
+                                        <button class="btn btn--small" data-action="restore" onclick="restoreevent(${index})" data-event-id="1">Restore</button>
+                                    </td>
+                                </tr>`;
+  });
+}
+
+function restoreevent(index) {
+  events.push(archive[index]);
+  console.log(events);
+}
