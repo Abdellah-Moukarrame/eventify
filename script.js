@@ -190,8 +190,9 @@ function closemodal() {
   divmodal.classList.add("is-hidden");
 }
 
+const archivetable = document.querySelector("#data-archive-table");
 function listarchive() {
-  const archivetable = document.querySelector("#data-archive-table");
+
   console.log(archivetable);
 
   archive = JSON.parse(localStorage.getItem("arch")) || [];
@@ -212,5 +213,9 @@ function listarchive() {
 
 function restoreevent(index) {
   events.push(archive[index]);
-  console.log(events);
+  localStorage.setItem("event", JSON.stringify(events));
+  archive.splice(index,1);
+  localStorage.setItem("arch", JSON.stringify(archive));
+  listevents();
+  listarchive();
 }
