@@ -138,10 +138,8 @@ function cntrtotalevent() {
   totleeventcntr.textContent = cntrevent;
   totalepricecntr.textContent = "$" + totalprice;
 }
-
+const tbody = document.querySelector(".table__body");
 function listevents() {
-  const tbody = document.querySelector(".table__body");
-
   events = JSON.parse(localStorage.getItem("event")) || [];
 
   tbody.innerHTML = "";
@@ -192,7 +190,6 @@ function closemodal() {
 
 const archivetable = document.querySelector("#data-archive-table");
 function listarchive() {
-
   console.log(archivetable);
 
   archive = JSON.parse(localStorage.getItem("arch")) || [];
@@ -214,7 +211,7 @@ function listarchive() {
 function restoreevent(index) {
   events.push(archive[index]);
   localStorage.setItem("event", JSON.stringify(events));
-  archive.splice(index,1);
+  archive.splice(index, 1);
   localStorage.setItem("arch", JSON.stringify(archive));
   listevents();
   listarchive();
