@@ -138,10 +138,8 @@ function cntrtotalevent() {
   totleeventcntr.textContent = cntrevent;
   totalepricecntr.textContent = "$" + totalprice;
 }
-
+const tbody = document.querySelector(".table__body");
 function listevents() {
-  const tbody = document.querySelector(".table__body");
-
   events = JSON.parse(localStorage.getItem("event")) || [];
 
   tbody.innerHTML = "";
@@ -186,3 +184,33 @@ function detailstable(index) {
   });
 }
 
+////////////  SEARCH FUNCTION
+function search() {
+  const searchbar = document
+    .querySelector("#search-events")
+    .value.toLowerCase();
+  console.log(searchbar);
+
+  events = JSON.parse(localStorage.getItem("event")) || [];
+
+  tbody.innerHTML = "";
+  events.forEach((event, index) => {
+    if (event.title.toLowerCase().includes(searchbar)) {
+      tbody.innerHTML += `
+      <tr class="table__row" >
+        <td>${index + 1}</td>
+        <td>${event.title}</td>
+        <td>${event.nombrseats}</td>
+        <td><span class="badge">${event.prix}</span></td>
+        <td>
+          <button class="btn btn--small" data-action="details" onclick="detailstable(${index})" data-event-id="1">Details</button>
+          <button class="btn btn--small" data-action="edit" onclick="edittable(${index})" data-event-id="1">Edit</button>
+          <button class="btn btn--danger btn--small" onclick="deletetable(${index})" data-action="archive" data-event-id="1">Delete</button>
+        </td>
+      </tr>`;
+    }
+  });
+}
+////////////  SORT FUNCTION
+
+function sort() {}
