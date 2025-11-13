@@ -140,7 +140,6 @@ function cntrtotalevent() {
 }
 const tbody = document.querySelector(".table__body");
 function listevents() {
-
   const tbody = document.querySelector(".table__body");
   events = JSON.parse(localStorage.getItem("event")) || [];
   tbody.innerHTML = "";
@@ -172,24 +171,194 @@ function deletetable(index) {
 }
 
 const divmodal = document.querySelector(".modal");
+const edit_modal = document.querySelector(".edit-modal");
 
+function edittable(index) {
+  edit_modal.classList.remove("is-hidden");
+  const editmodal__body = document.querySelector(".editmodal__body");
 
+  editmodal__body.innerHTML = `
+      <form class="form" id="event-form">
+                            <!-- Error messages area -->
+                            <div class="alert alert--error is-hidden" id="form-errors"></div>
+
+                            <!-- Title -->
+                            <div class="form__group">
+                                <label class="form__label" for="event-title">Event Title</label>
+                                <input 
+                                    type="text" 
+                                    id="edit-title" 
+                                    class="input" 
+                                    placeholder="Enter event title"
+                                    value=${events[index].title}
+                                    required
+                                >
+                            </div>
+
+                            <!-- Image URL -->
+                            <div class="form__group">
+                                <label class="form__label" for="event-image">Image URL</label>
+                                <input 
+                                    type="url" 
+                                    id="edit-image" 
+                                    class="input" 
+                                    placeholder="https://example.com/image.jpg"
+                                    value=${events[index].image}
+                                >
+                            </div>
+                            <br>
+                            <div class="image_container">
+
+                            </div>
+
+                            <!-- Description -->
+                            <div class="form__group">
+                                <label class="form__label" for="event-description">Description</label>
+                                <textarea 
+                                    id="edit-description" 
+                                    class="input" 
+                                    placeholder="Describe the event..."
+                                    rows="4"
+                                >${events[index].description}</textarea>
+                            </div>
+
+                            <!-- Seats -->
+                            <div class="form__group">
+                                <label class="form__label" for="event-seats">Number of Seats</label>
+                                <input 
+                                    type="number" 
+                                    id="edit-seats" 
+                                    class="input" 
+                                    placeholder="100"
+                                    min="1"
+                                    value=${events[index].nombrseats}
+                                    required
+                                >
+                            </div>
+
+                            <!-- Base Price -->
+                            <div class="form__group">
+                                <label class="form__label" for="event-price">Base Price ($)</label>
+                                <input 
+                                    type="number" 
+                                    id="edit-price" 
+                                    class="input" 
+                                    placeholder="50.00"
+                                    min="0"
+                                    step="0.01"
+                                    value=${events[index].prix}
+                                    required
+                                >
+                            </div>
+
+                            <!-- VARIANTS SECTION 
+                            <fieldset class="variants">
+                                <legend class="variants__title">
+                                    Pricing Variants (Optional)
+                                    <button type="button" class="btn btn--small" onclick="addvariante()" id="btn-add-variant">+ Add Variant</button>
+                                </legend>
+                                
+                                <!-- Variant rows will be appended here by JS -->
+                                <div id="variants-list" class="variants__list">
+                                    <!-- EXAMPLE: Students should clone this structure -->
+                                    <!-- 
+                                    <div class="variant-row">
+                                        <input type="text" class="input variant-row__name" placeholder="Variant name (e.g., 'Early Bird')" />
+                                        <input type="number" class="input variant-row__qty" placeholder="Qty" min="1" />
+                                        <input type="number" class="input variant-row__value" placeholder="Value" step="0.01" />
+                                        <select class="select variant-row__type">
+                                            <option value="fixed">Fixed Price</option>
+                                            <option value="percentage">Percentage Off</option>
+                                        </select>
+                                        <button type="button" class="btn btn--danger btn--small variant-row__remove">Remove</button>
+                                    </div>
+                                    -->
+                                </div>
+                            </fieldset>-->
+
+                            <!-- Submit Button -->
+                            <div class="form__actions">
+                                <button type="button" onclick="Enregestrer(${index})" class="btn btn--primary">Enregestrer</button>
+                                
+                            </div>
+                        </form>
+  `;
+}
+function Enregestrer(index) {
+  const regextitle = /^[a-zA-ZÀ-ÿ0-9\s'.,-]{2,100}$/;
+  const regeximageurl = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
+  const regexdescription = /^[\wÀ-ÿ\s.,'?!-]{10,500}$/;
+  const regexnombrseats = /^[1-9][0-9]{0,2}$/;
+  const regexprix = /^(?:\d+|\d+\.\d{1,2})$/;
+  const errormsg = document.querySelector(".alert");
+  const title = document.querySelector("#edit-title").value.trim();
+  const imageurl = document.querySelector("#edit-image").value.trim();
+  const description = document.querySelector("#edit-description").value.trim();
+  const nombrseats = document.querySelector("#edit-seats").value.trim();
+  const prix = document.querySelector("#edit-price").value.trim();
+  if (!regextitle.test(title)) {
+    errormsg.classList.remove("is-hidden");
+    errormsg.textContent = "title est invalid essayer une autre fois";
+    return;
+  } else {
+    errormsg.classList.add("is-hidden");
+  }
+  if (!regeximageurl.test(imageurl)) {
+    errormsg.classList.remove("is-hidden");
+    errormsg.textContent = "imageurl est invalid essayer une autre fois";
+    return;
+  } else {
+    errormsg.classList.add("is-hidden");
+  }
+  if (!regexdescription.test(description)) {
+    errormsg.classList.remove("is-hidden");
+    errormsg.textContent = "description est invalid essayer une autre fois";
+    return;
+  } else {
+    errormsg.classList.add("is-hidden");
+  }
+  if (!regexnombrseats.test(nombrseats)) {
+    errormsg.classList.remove("is-hidden");
+    errormsg.textContent = "nombrseats est invalid essayer une autre fois";
+    return;
+  } else {
+    errormsg.classList.add("is-hidden");
+  }
+  if (!regexprix.test(prix)) {
+    errormsg.classList.remove("is-hidden");
+    errormsg.textContent = "prix est invalid essayer une autre fois";
+    return;
+  } else {
+    errormsg.classList.add("is-hidden");
+  }
+
+  events[index] = {
+    title: title,
+    image: imageurl,
+    description: description,
+    nombrseats: nombrseats,
+    prix: prix,
+  };
+
+  localStorage.setItem("event", JSON.stringify(events));
+  listevents();
+}
 
 function detailstable(index) {
   const modal = document.querySelector(".modal__body");
   divmodal.classList.remove("is-hidden");
   events.forEach(() => {
     modal.innerHTML = `
-      <h1>Title : ${events[index].title} </h1>
-      <h1>Prix : ${events[index].prix} </h1>
-      <h1>NombreSeats : ${events[index].nombrseats} </h1>
+      <h2>Title : ${events[index].title} </h2>
+      <h2>Prix : ${events[index].prix} </h2>
+      <h2>NombreSeats : ${events[index].nombrseats} </h2>
   `;
   });
 }
 
-
 function closemodal() {
   divmodal.classList.add("is-hidden");
+  edit_modal.classList.add("is-hidden");
 }
 
 const archivetable = document.querySelector("#data-archive-table");
@@ -220,4 +389,3 @@ function restoreevent(index) {
   listevents();
   listarchive();
 }
-
