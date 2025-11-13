@@ -138,8 +138,9 @@ function cntrtotalevent() {
   totleeventcntr.textContent = cntrevent;
   totalepricecntr.textContent = "$" + totalprice;
 }
-
+const tbody = document.querySelector(".table__body");
 function listevents() {
+
   const tbody = document.querySelector(".table__body");
   events = JSON.parse(localStorage.getItem("event")) || [];
   tbody.innerHTML = "";
@@ -167,10 +168,12 @@ function deletetable(index) {
   events.splice(index, 1);
   localStorage.setItem("event", JSON.stringify(events));
   listevents();
-  // listarchive();
+  listarchive();
 }
 
 const divmodal = document.querySelector(".modal");
+
+
 
 function detailstable(index) {
   const modal = document.querySelector(".modal__body");
@@ -183,3 +186,38 @@ function detailstable(index) {
   `;
   });
 }
+
+
+function closemodal() {
+  divmodal.classList.add("is-hidden");
+}
+
+const archivetable = document.querySelector("#data-archive-table");
+function listarchive() {
+  console.log(archivetable);
+
+  archive = JSON.parse(localStorage.getItem("arch")) || [];
+  archivetable.innerHTML = "";
+  archive.forEach((ar, index) => {
+    archivetable.innerHTML += `
+   <tr class="table__row" data-event-id="1">
+                                    <td>${index + 1}</td>
+                                    <td>${ar.title}</td>
+                                    <td>${ar.prix}</td>
+                                    <td>${ar.nombrseats}</td>
+                                    <td>
+                                        <button class="btn btn--small" data-action="restore" onclick="restoreevent(${index})" data-event-id="1">Restore</button>
+                                    </td>
+                                </tr>`;
+  });
+}
+
+function restoreevent(index) {
+  events.push(archive[index]);
+  localStorage.setItem("event", JSON.stringify(events));
+  archive.splice(index, 1);
+  localStorage.setItem("arch", JSON.stringify(archive));
+  listevents();
+  listarchive();
+}
+
