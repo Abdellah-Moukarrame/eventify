@@ -109,6 +109,8 @@ function addvariante() {
   console.log(cntrvariant);
 }
 
+/////////// CRUD EVENT
+
 function deletevariante(index) {
   let deletedvariante = index.closest(".variant-row");
   deletedvariante.remove();
@@ -361,6 +363,8 @@ function closemodal() {
   edit_modal.classList.add("is-hidden");
 }
 
+//////////// ARCHIVE
+
 const archivetable = document.querySelector("#data-archive-table");
 function listarchive() {
   console.log(archivetable);
@@ -380,6 +384,8 @@ function listarchive() {
                                 </tr>`;
   });
 }
+
+
 
 function restoreevent(index) {
   events.push(archive[index]);
@@ -414,4 +420,10 @@ function search() {
   })
   
 
+}
+
+//////////  SORT
+
+function sort() {
+  
 }
