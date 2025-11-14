@@ -138,7 +138,7 @@ function cntrtotalevent() {
   //affecter les resultats
   totaleseatscntr.textContent = totalseats;
   totleeventcntr.textContent = cntrevent;
-  totalepricecntr.textContent = "$" + totalprice;
+  totalepricecntr.textContent = "$" + totalprice * totalseats;
 }
 const tbody = document.querySelector(".table__body");
 function listevents() {
