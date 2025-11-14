@@ -389,3 +389,29 @@ function restoreevent(index) {
   listevents();
   listarchive();
 }
+
+
+////////// SEARCH 
+function search() {
+  const saerchevent = document.querySelector("#search-events").value.toLowerCase();
+  tbody.innerHTML=''
+  events.forEach((event,index)=>{
+    if (event.title.toLowerCase().includes(saerchevent)) {
+    tbody.innerHTML+=`
+    <tr class="table__row" >
+        <td>${index + 1}</td>
+        <td>${event.title}</td>
+        <td>${event.nombrseats}</td>
+        <td><span class="badge">${event.prix}</span></td>
+        <td>
+          <button class="btn btn--small" data-action="details" onclick="detailstable(${index})" data-event-id="1">Details</button>
+          <button class="btn btn--small" data-action="edit" onclick="edittable(${index})" data-event-id="1">Edit</button>
+          <button class="btn btn--danger btn--small" onclick="deletetable(${index})" data-action="archive" data-event-id="1">Delete</button>
+        </td>
+    </tr>
+    `
+  }
+  })
+  
+
+}
